@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="assets/js/color-modes.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termômetro Subindo</title>
+    <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@4.1.1/dist/maplibre-gl.css' />
+    <script src='https://unpkg.com/maplibre-gl@4.1.1/dist/maplibre-gl.js'></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .thermometer {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        margin: 50px auto;
+    }
+
+    .bol{
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        border-radius: 100%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 35px;
+        background-color: green;
+    }
+    .thermometer-bar {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        border-top-left-radius: 35%;
+        border-top-right-radius: 35%;
+        transform: translateX(-50%);
+        height: 100px;
+        width: 20px;
+        background: linear-gradient(to top, green, yellow, red);
+        /* background: linear-gradient(to top, green 0%, green 33.3333%, yellow 33.3333%, yellow 66.6666%, red 66.6666%, red 100%); */
+        /* background: linear-gradient(to top, green, yellow, red); */
+        /* background-color: green; */
+        transition: height 0.5s ease;
+    }
+
+    .thermometer-image {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1; /* Para garantir que a imagem esteja acima da barra */
+    }
+
+    .thermometer-temperature {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 16px;
+        z-index: 2; /* Para garantir que o texto esteja acima da imagem */
+    }
+
+    .temperature-slider {
+        width: 200px;
+        margin: 20px auto;
+        display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="thermometer">
+    <div class="thermometer-bar" id="thermometerBar"></div>
+    <img src="https://cdn-icons-png.flaticon.com/512/1086/1086431.png" alt="Termômetro" class="thermometer-image">
+    <div class="bol" id="bol"></div>
+    <div class="thermometer-temperature" id="temperature">0°C</div>
+  </div>
+  <input type="range" min="0" max="100" value="0" class="temperature-slider" id="temperatureSlider">
+  <div class="row text-center">
+    <div class="col-lg-4">
+      <h3>
+        <span class="material-symbols-outlined">
+          water_drop
+        </span>
+      </h3>
+    </div>
+    <div class="col-lg-4">
+      <h3>
+        <span class="material-symbols-outlined">
+          opacity
+        </span>
+      </h3>
+    </div>
+    <div class="col-lg-4">
+      <h3>
+        <span class="material-symbols-outlined">
+          humidity_high
+        </span>
+      </h3>
+    </div>
+  </div>
+  <script>
+    const thermometerBar = document.querySelector('.thermometer-bar');
+    const temperatureDisplay = document.getElementById('temperature');
+    const temperatureSlider = document.getElementById('temperatureSlider');
+    
+    // function updateTemperature() {
+    //   const temperature = temperatureSlider.value;
+    //   thermometerBar.style.height = temperature + '%';
+    // //   thermometerBar.style.borderRadius = temperature + '%';
+    //   temperatureDisplay.textContent = temperature + '°C';
+    // }
+    function updateTemperature() {
+        const temperature = temperatureSlider.value;
+        temperatureDisplay.textContent = temperature + '°C';
+    //   thermometerBar.style.height = temperature + '%';
+    //   if (temperature < 33.3333333){
+    //     console.log('verde');
+    //     thermometerBar.style.background = `linear-gradient(to top, green 0%, green 100%)`;
+    //   } else if (temperature < 66.6666666){
+    //     thermometerBar.style.background = `linear-gradient(to top, green 0%, green 33.3333333%, yellow 66.6666666%)`;
+    //   }else{
+    //     thermometerBar.style.background = `linear-gradient(to top, green 33%, yellow 33%, red 33%)`;
+    //   }
+    //   thermometerBar.style.background = `linear-gradient(to top, green ${temperature}%, yellow ${temperature}%, red)`;
+        
+    }
+    temperatureSlider.addEventListener('input', updateTemperature);
+    
+    // Chamando a função inicialmente para exibir o valor inicial do slider
+    updateTemperature();
+  </script>
+  <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+</body>
+</html>
