@@ -281,6 +281,45 @@
             <div class="progress-bar progress-bar-striped progress-bar-animated" id="turbidezLevel"></div>
         </div>
         <h3>Temperatura</h3>
+		<p id="temperature"></p>
+		<div class="row text-center">
+          <div class="col text-start">
+            <h3>
+              <span class="material-symbols-outlined">
+                water_drop
+              </span><br>
+            </h3>
+            <!-- <div class="text-left vr"> 1000</div> -->
+          </div>
+          <div class="col">
+            <h3>
+              <span class="material-symbols-outlined">
+                opacity
+              </span>
+            </h3>
+          </div>
+          <div class="col text-end">
+            <h3>
+              <span class="material-symbols-outlined">
+                humidity_high
+              </span>
+            </h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 text-left">
+            <div class="text-left vr"> 0</div>
+          </div>
+          <div class="col-sm-4 text-center">
+            <div class="vr"> 50</div>
+          </div>
+          <div class="col-4 col-lg-3 text-end">
+            <div class="text-end vr"> 100</div>
+          </div>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" id="temperatureLevel"></div>
+        </div>
         <hr>
         <script>
 		 var dados = 1;
@@ -293,11 +332,14 @@
                     // Quando os dados são recebidos, atualiza o conteúdo da página
                     dados = xhr.responseText;
                     var partes = dados.split(' ');
-					var temperatura = partes[0];
-					var turbidez = partes[1]; 
-					document.getElementById("demo").innerHTML = 'Nível de Turbidez: ' + turbidez + ' NTU' + '<br>' + 'Temperatura: ' + temperatura;
+					var turbidez = partes[0]; 
+					var temperatura = partes[1];
+					document.getElementById("demo").innerHTML = 'Nível de Turbidez: ' + turbidez + ' NTU';
+					document.getElementById("temperature").innerHTML = 'Temperatura: ' + temperatura + '°C';
 					var turbidezLevel = document.getElementById("turbidezLevel");
+					var temperatureLevel = document.getElementById("temperatureLevel");
 					turbidezLevel.style.width = turbidez/30+'%';
+					temperatureLevel.style.width = temperatura+'%';
 					console.log(dados);
                     //document.getElementById("dados-recebidos").innerText = dados;
                 }
@@ -312,57 +354,6 @@
               console.log("Modal start");
 			  //recarrega();
 			  setInterval(recarrega, 100); // Intervalo de 1 segundo (1000 milissegundos)
-              // Dados Aleatórios para Teste
-              //var turbidez = dados; 
-              //document.getElementById("demo").innerHTML = 'Nível de Turbidez: ' + turbidez + ' NTU';
-              //var turbidezLevel = document.getElementById("turbidezLevel");
-              //turbidezLevel.style.width = turbidez/30+'%';
-			  //console.log(dados);
-			  
-			  
-			  
-
-              //const xhr = new XMLHttpRequest();
-
-              //xhr.open("GET", "https://dados.pagekite.me/obter-dados", true);
-			  //console.log(xhr.responseText);
-			  
-              // // Cria uma nova instância do objeto XMLHttpRequest
-              // var xhr = new XMLHttpRequest();
-
-              // // Configura a solicitação GET
-              // xhr.open('POST', 'https://sesorturbidy-a4107958f5e1.herokuapp.com/obter-dados', false);
-
-              // console.log("XHR: "+xhr.status);
-
-              // // Define a função de callback para quando a resposta for carregada
-              // xhr.onload = function() {
-              //   if (xhr.status >= 200 && xhr.status < 300) {
-              //     // O pedido foi bem-sucedido
-              //     console.log(xhr.responseText); // Aqui você pode manipular os dados recebidos
-              //   } else {
-              //     // Houve um erro ao fazer a solicitação
-              //     console.error('Erro ao fazer a solicitação:', xhr.statusText);
-              //   }
-              // };
-
-              // // Define a função de callback para lidar com erros de rede
-              // xhr.onerror = function() {
-              //   console.error('Erro de rede ao fazer a solicitação.');
-              // };
-                // // Button that triggered the modal
-                // const button = event.relatedTarget
-                // // Extract info from data-bs-* attributes
-                // const recipient = button.getAttribute('data-bs-whatever')
-                // // If necessary, you could initiate an Ajax request here
-                // // and then do the updating in a callback.
-
-                // // Update the modal's content.
-                // const modalTitle = exampleModal.querySelector('.modal-title')
-                // const modalBodyInput = exampleModal.querySelector('.modal-body input')
-
-                // modalTitle.textContent = `New message to ${recipient}`
-                // modalBodyInput.value = recipient
               })
               modal1.addEventListener('hidden.bs.modal', event => {
                 console.log("Modal fechado");

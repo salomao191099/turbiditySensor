@@ -33,12 +33,13 @@ class MyHandler(Handler):
                     else:
                         valores_selecionados += valor  # Adiciona o valor à nova string
                 dados_formatadosTurbidez = valores_selecionados
-                dados_formatados = dados_formatados[indice+4:indice+9]
+                dados_formatadosTemperatura = dados_formatados[indice+4:indice+9]
+                dados_formatadosTemperatura = ''.join(filter(lambda x: x.isdigit() or x == '.', dados_formatadosTemperatura))
                 # Retorna os dados obtidos
                 self.send_response(200)
                 self.send_header('Content-type', 'text/plain')
                 self.end_headers()
-                resposta = f"{dados_formatados} {dados_formatadosTurbidez}"
+                resposta = f"{dados_formatadosTurbidez} {dados_formatadosTemperatura}"
                 self.wfile.write(resposta.encode())
                 #print(dados_formatadosTurbidez)
                 print(resposta)
